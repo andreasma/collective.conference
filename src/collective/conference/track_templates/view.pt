@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.conference">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 class="documentFirstHeading" tal:content="context/title" />
+
+        <div class="discreet" tal:condition="view/canRequestReview" i18n:translate="suggest_review">
+            Please submit this for review.
+        </div>
+
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+        <p class="documentDescription" tal:content="context/description" />
+
+
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+
+        <div tal:content="structure view/w/details/render" />
+
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+        <table border="0" width="100%">
+        
+         <tbody tal:repeat="item container/values">
+        <tr bgcolor="#EEEEEE" tal:condition="repeat/item/even">
+          <td><h4><a tal:attributes="href item/getId"
+       tal:content="item/Title" /></h4></td>
+          <td tal:content="item/room">Room</td>
+          
+      <td> <tal:block condition="item/start">
+                <span i18n:translate="label_from">From:</span>
+                <span tal:content="python:item.start.strftime('%x %X')" />
+       </tal:block></td>
+       <td> <tal:block condition="item/end">
+                <span i18n:translate="label_from">To:</span>
+                <span tal:content="python:item.end.strftime('%x %X')" />
+       </tal:block></td>
+       <td tal:content="item/Description">Description</td>
+          
+        </tr>
+         <tr tal:condition="repeat/item/odd">
+          <td><h4><a tal:attributes="href item/getId"
+       tal:content="item/Title" /></h4></td>
+          <td tal:content="item/room">Room</td>
+          
+      <td> <tal:block condition="item/start">
+                <span i18n:translate="label_from">From:</span>
+                <span tal:content="python:item.start.strftime('%x %X')" />
+       </tal:block></td>
+       <td> <tal:block condition="item/end">
+                <span i18n:translate="label_from">To:</span>
+                <span tal:content="python:item.end.strftime('%x %X')" />
+       </tal:block></td>
+       <td tal:content="item/Description">Description</td>   
+        </tr>
+        </tbody>
+      </table>
+        
+        
+
+    </tal:main-macro>
+</metal:main>
+
+
+</body>
+</html>

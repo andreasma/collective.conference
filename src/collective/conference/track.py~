@@ -1,0 +1,37 @@
+from five import grok
+from zope import schema
+
+from Acquisition import aq_inner, aq_parent
+from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.vocabulary import SimpleVocabulary
+
+from zope.security import checkPermission
+
+from plone.directives import form, dexterity
+from plone.app.textfield import RichText
+
+from z3c.relationfield.schema import RelationChoice
+from plone.formwidget.contenttree import ObjPathSourceBinder
+
+from plone.formwidget.autocomplete import AutocompleteFieldWidget
+
+from collective.conference import _
+
+class ITrack(form.Schema):
+    """A conference track. Tracks are managed inside Programs.
+    """
+
+    title = schema.TextLine(
+            title=_(u"Title"),
+            description=_(u"Track title"),
+        )
+
+    description = schema.Text(
+            title=_(u"Track summary"),
+        )
+
+    form.primary('details')
+    details = RichText(
+            title=_(u"Track details"),
+            required=False
+        )

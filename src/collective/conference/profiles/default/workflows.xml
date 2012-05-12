@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="portal_workflow">
+    <bindings>
+        <type type_id="collective.conference.talk">
+            <bound-workflow workflow_id="collective.conference.talk_workflow"/>
+        </type>
+    </bindings>
+</object>

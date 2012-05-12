@@ -1,0 +1,27 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:grok="http://namespaces.zope.org/grok"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.conference">
+
+    <!-- Include configuration for dependencies listed in setup.py -->
+    <includeDependencies package="." />
+
+
+    <include file="permissions.zcml" />
+    
+    <!-- Grok the package to initialise schema interfaces and content classes -->
+    <grok:grok package="." />
+    
+
+    <genericsetup:registerProfile
+        name="default"
+        title="collective.conference"
+        directory="profiles/default"
+        description="Installs the Collective Conference Management package"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+    <!-- -*- extra stuff goes here -*- -->
+
+</configure>
