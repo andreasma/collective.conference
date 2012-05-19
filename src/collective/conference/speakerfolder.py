@@ -26,7 +26,7 @@ from zope.security import checkPermission
 from collective.conference.speaker import ISpeaker
 
 class ISpeakerfolder(form.Schema):
-    """A conference program. Programs can contain Tracks.
+    """A speaker folder. The speaker of the conference are created in the folder.
     """
 
 

@@ -40,11 +40,13 @@
             </tal:block>
         </div>
         <div class="talkroom">
+        
          <label i18n:translate="label_room">Room:</label>
-           <span tal:content="context/room | nothing"/>
+           <span tal:content="context/room/to_object/Title | nothing"/>
         </div>
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
+        <h4>Details of the Talk</h4>
 
         <div tal:content="structure view/w/details/render" />
 

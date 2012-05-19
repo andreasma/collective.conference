@@ -6,4 +6,6 @@
  <object name="collective.conference.track" meta_type="Dexterity FTI" />
  <object name="collective.conference.talk" meta_type="Dexterity FTI" />
  <object name="collective.conference.workshop" meta_type="Dexterity FTI" />
+ <object name="collective.conference.roomfolder" meta_type="Dexterity FTI" />
+ <object name="collective.conference.room" meta_type="Dexterity FTI" />
 </object>

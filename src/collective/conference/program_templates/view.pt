@@ -48,7 +48,13 @@
         <tr bgcolor="#EEEEEE" tal:condition="repeat/item/even">
           <td><h4><a tal:attributes="href item/getId"
        tal:content="item/Title" /></h4></td>
-          <td tal:content="item/room">Room</td>
+       
+        <td tal:condition="item/room">
+            <label i18n:translate="room">Room:</label>
+            <span tal:content="item/room/to_object/Title | nothing" />
+            
+        </td>
+        
           
       <td> <tal:block condition="item/start">
                 <span i18n:translate="label_from">From:</span>
@@ -64,8 +70,12 @@
          <tr tal:condition="repeat/item/odd">
           <td><h4><a tal:attributes="href item/getId"
        tal:content="item/Title" /></h4></td>
-          <td tal:content="item/room">Room</td>
-          
+        <td tal:condition="item/room">
+            <label i18n:translate="room">Room:</label>
+            <span tal:content="item/room/to_object/Title | nothing" />
+            
+        </td>
+            
       <td> <tal:block condition="item/start">
                 <span i18n:translate="label_from">From:</span>
                 <span tal:content="python:item.start.strftime('%x %X')" />

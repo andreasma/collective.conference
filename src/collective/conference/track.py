@@ -28,6 +28,8 @@ from collective.conference import _
 
 from Products.CMFCore.utils import getToolByName
 
+from collective.conference.room import IRoom
+
 
 
 class StartBeforeEnd(Invalid):
@@ -68,10 +70,19 @@ class ITrack(form.Schema):
             description =_(u"End date"),
             required=False,
         )
-    
-    room = schema.TextLine(
-            title= _(u"Room"),
+    # use an autocomplete selection widget instead of the default content tree
+    form.widget(room=AutocompleteFieldWidget)
+    room = RelationChoice(
+            title=_(u"Room"),
+            source=ObjPathSourceBinder(object_provides=IRoom.__identifier__),
+            required=False,
         )
+        
+
+    
+#    room = schema.TextLine(
+#            title= _(u"Room"),
+#        )
     
     
     
