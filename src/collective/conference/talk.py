@@ -23,9 +23,12 @@ from plone.formwidget.autocomplete import AutocompleteFieldWidget
 from collective.conference import _
 
 from collective.conference.speaker import ISpeaker
+from collective.conference.track import ITrack
 
 from plone.namedfile.field import NamedBlobFile
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.schema.interfaces import Bool
+
 
 
 class StartBeforeEnd(Invalid):
@@ -41,6 +44,12 @@ class ITalk(form.Schema):
         SimpleTerm(value=u'45', title=_(u'45 minutes')),
         SimpleTerm(value=u'60', title=_(u'60 minutes'))]
         )
+    
+#    talktrack = SimpleVocabulary(
+#       [SimpleTerm(value=u'UX', title=_(u'Usability')),
+#        SimpleTerm(value=u'Core-Development', title=_(u'Development in the Core')),
+#        SimpleTerm(value=u'Extension-Development', title=_(u'Development of Extensions')),]
+#        )
 
     title = schema.TextLine(
             title=_(u"Title"),
@@ -54,30 +63,46 @@ class ITalk(form.Schema):
     form.primary('details')
     details = RichText(
             title=_(u"Talk details"),
-            required=False
+            required=True
         )
 
     # use an autocomplete selection widget instead of the default content tree
     form.widget(speaker=AutocompleteFieldWidget)
     speaker = RelationChoice(
-            title=_(u"Speaker"),
+            title=_(u"Presenter"),
             source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
             required=False,
         )
-    
-    
-    start = schema.Datetime(
-            title=_(u"Startdate"),
-            description =_(u"Start date"),
+    form.widget(speaker=AutocompleteFieldWidget)
+    speaker2 = RelationChoice(
+            title=_(u"Co-Presenter"),
+            source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
             required=False,
         )
-
-    end = schema.Datetime(
-            title=_(u"Enddate"),
-            description =_(u"End date"),
+    form.widget(track=AutocompleteFieldWidget)
+    track = RelationChoice(
+            title=_(u"Track"),
+            source=ObjPathSourceBinder(object_provides=ITrack.__identifier__),
             required=False,
         )
     
+#    
+#    start = schema.Datetime(
+#            title=_(u"Startdate"),
+#            description =_(u"Start date"),
+#            required=False,
+#        )
+#
+#    end = schema.Datetime(
+#            title=_(u"Enddate"),
+#            description =_(u"End date"),
+#            required=False,
+#        )
+#    talktrack= schema.Choice(
+#               title=_(u"Choose the Track for the Talk"),
+#               vocabulary=talktrack,
+#               required=True,
+#               )
         
     length= schema.Choice(
             title=_(u"Length"),
@@ -98,14 +123,20 @@ class ITalk(form.Schema):
             description=_(u"Please upload your presentation"),
             required=False,
         )
-
     
-    @invariant
-    def validateStartEnd(data):
-        if data.start is not None and data.end is not None:
-            if data.start > data.end:
-                raise StartBeforeEnd(_(
-                    u"The start date must be before the end date."))
+    creativecommonslicense= schema.Bool(
+            title=_(u'label_creative_commons_license', default=u'License is Creative Commons Attribution-Share Alike 3.0 License.'),
+                description=_(u'help_creative_commons_license', default=u'You agree that your talk and slides are provided under the Creative Commons Attribution-Share Alike 3.0 License.'),
+                default=True
+        )
+
+
+#    @invariant
+#    def validateStartEnd(data):
+#        if data.start is not None and data.end is not None:
+#            if data.start > data.end:
+#                raise StartBeforeEnd(_(
+#                    u"The start date must be before the end date."))
 
 class View(dexterity.DisplayForm):
     grok.context(ITalk)

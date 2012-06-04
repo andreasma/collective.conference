@@ -22,8 +22,11 @@ from plone.formwidget.autocomplete import AutocompleteFieldWidget
 from collective.conference import _
 
 from collective.conference.speaker import ISpeaker
+from collective.conference.track import ITrack
 
 from plone.namedfile.field import NamedBlobFile
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+
 
 
 
@@ -34,6 +37,13 @@ class StartBeforeEnd(Invalid):
 class IWorkshop(form.Schema):
     """A conference workshop. Workshops are managed inside tracks of the Program.
     """
+        
+    length = SimpleVocabulary(
+       [SimpleTerm(value=u'30', title=_(u'30 minutes')),
+        SimpleTerm(value=u'45', title=_(u'45 minutes')),
+        SimpleTerm(value=u'60', title=_(u'60 minutes'))]
+        )
+    
 
     title = schema.TextLine(
             title=_(u"Title"),
@@ -53,24 +63,45 @@ class IWorkshop(form.Schema):
     # use an autocomplete selection widget instead of the default content tree
     form.widget(speaker=AutocompleteFieldWidget)
     speaker = RelationChoice(
-            title=_(u"Speaker"),
+            title=_(u"Presenter"),
             source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
+            required=False,
+        )
+    form.widget(speaker=AutocompleteFieldWidget)
+    speaker2 = RelationChoice(
+            title=_(u"Co-Presenter"),
+            source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
+            required=False,
+        )
+    form.widget(track=AutocompleteFieldWidget)
+    track = RelationChoice(
+            title=_(u"Track"),
+            source=ObjPathSourceBinder(object_provides=ITrack.__identifier__),
             required=False,
         )
     
         
     
-    start = schema.Datetime(
-            title=_(u"Startdate"),
-            description =_(u"Start date"),
-            required=False,
+#    start = schema.Datetime(
+#            title=_(u"Startdate"),
+#            description =_(u"Start date"),
+#            required=False,
+#        )
+#
+#    end = schema.Datetime(
+#            title=_(u"Enddate"),
+#            description =_(u"End date"),
+#            required=False,
+#        )
+    
+            
+    length= schema.Choice(
+            title=_(u"Length"),
+            vocabulary=length,
+            required=True,
         )
+  
 
-    end = schema.Datetime(
-            title=_(u"Enddate"),
-            description =_(u"End date"),
-            required=False,
-        )
       
     order=schema.Int(
            title=_(u"Orderintrack"),               
@@ -85,12 +116,12 @@ class IWorkshop(form.Schema):
             required=False,
         )    
     
-    @invariant
-    def validateStartEnd(data):
-        if data.start is not None and data.end is not None:
-            if data.start > data.end:
-                raise StartBeforeEnd(_(
-                    u"The start date must be before the end date."))
+#    @invariant
+#    def validateStartEnd(data):
+#        if data.start is not None and data.end is not None:
+#            if data.start > data.end:
+#                raise StartBeforeEnd(_(
+#                    u"The start date must be before the end date."))
                 
 
 

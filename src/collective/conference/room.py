@@ -4,12 +4,13 @@ from zope import schema
 from plone.directives import form, dexterity
 
 from plone.app.textfield import RichText
-from plone.namedfile.field import NamedImage
+from plone.namedfile.field import NamedBlobImage
 
 from zope.app.container.interfaces import IObjectAddedEvent
 from Products.CMFCore.utils import getToolByName
 
 from collective.conference import _
+
 
 class IRoom(form.Schema):
     """A conference room.
@@ -25,7 +26,7 @@ class IRoom(form.Schema):
         )
 
     
-    picture = NamedImage(
+    picture = NamedBlobImage(
             title=_(u"A picture of the room"),
             description=_(u"Please upload an image"),
             required=False,
@@ -34,7 +35,7 @@ class IRoom(form.Schema):
     form.primary ('details')
     details = RichText(
              title=_(u"A full description of the room, it's location and the way to get there"),
-             required=False                          
+             required=True,                          
         )
     
     capacity = schema.Int(

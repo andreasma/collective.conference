@@ -39,16 +39,12 @@
             <span tal:content="item/room/to_object/Title | nothing" />
             
         </td>
-        
-          
-      <td> <tal:block condition="item/start">
-                <span i18n:translate="label_from">From:</span>
-                <span tal:content="python:item.start.strftime('%x %X')" />
-       </tal:block></td>
-       <td> <tal:block condition="item/end">
-                <span i18n:translate="label_from">To:</span>
-                <span tal:content="python:item.end.strftime('%x %X')" />
-       </tal:block></td>
+        <td tal:condition="item/length">
+            <span tal:content="item/length | nothing" />
+            <span>minutes</span>
+        </td>
+  
+
        <td tal:content="item/Description">Description</td>
           
         </tr>
@@ -60,15 +56,11 @@
             <span tal:content="item/room/to_object/Title | nothing" />
             
         </td>
-        
-      <td> <tal:block condition="item/start">
-                <span i18n:translate="label_from">From:</span>
-                <span tal:content="python:item.start.strftime('%x %X')" />
-       </tal:block></td>
-       <td> <tal:block condition="item/end">
-                <span i18n:translate="label_from">To:</span>
-                <span tal:content="python:item.end.strftime('%x %X')" />
-       </tal:block></td>
+        <td tal:condition="item/length">
+            <span tal:content="item/length | nothing" />
+            <span>minutes</span>
+        </td>
+ 
        <td tal:content="item/Description">Description</td>   
         </tr>
         </tbody>
