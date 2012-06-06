@@ -28,11 +28,11 @@ from collective.conference.track import ITrack
 from plone.namedfile.field import NamedBlobFile
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.schema.interfaces import Bool
+from Products.CMFCore.utils import getToolByName
 
 
-
-class StartBeforeEnd(Invalid):
-    __doc__ = _(u"The start or end date is invalid")
+# class StartBeforeEnd(Invalid):
+#   __doc__ = _(u"The start or end date is invalid")
 
 
 class ITalk(form.Schema):
@@ -85,7 +85,7 @@ class ITalk(form.Schema):
             source=ObjPathSourceBinder(object_provides=ITrack.__identifier__),
             required=False,
         )
-    
+
 #    
 #    start = schema.Datetime(
 #            title=_(u"Startdate"),
@@ -113,7 +113,9 @@ class ITalk(form.Schema):
   
     order=schema.Int(
            title=_(u"Orderintrack"),               
-           description=_(u"Order in the track: write in an Integer"),
+           description=_(u"Order in the track: write in an Integer from 1 to 12"),
+           min=1,
+           max=12,
            required=False,
         )
                   
