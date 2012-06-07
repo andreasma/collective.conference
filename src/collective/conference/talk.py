@@ -109,8 +109,7 @@ class ITalk(form.Schema):
             vocabulary=length,
             required=True,
         )
-  
-  
+    dexterity.write_permission(order='collective.conference.ModifyTrack')  
     order=schema.Int(
            title=_(u"Orderintrack"),               
            description=_(u"Order in the track: write in an Integer from 1 to 12"),
@@ -131,6 +130,7 @@ class ITalk(form.Schema):
                 description=_(u'help_creative_commons_license', default=u'You agree that your talk and slides are provided under the Creative Commons Attribution-Share Alike 3.0 License.'),
                 default=True
         )
+    
 
 
 #    @invariant
