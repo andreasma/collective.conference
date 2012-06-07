@@ -13,10 +13,21 @@
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
         <h1 class="documentFirstHeading" tal:content="context/title" />
-
-        <div class="discreet" tal:condition="view/canRequestReview" i18n:translate="suggest_review">
-            Please submit this for review.
+  
+        
+        <div class="discreet">
+        <p><span i18n:translate="label_the">The</span> <span tal:content="context/title" />
+           
+            <tal:block condition="context/start">
+                <span i18n:translate="label_begins_at"> begins at</span>
+                <span tal:content="python:context.start.strftime('%d.%m.%Y %X')" />
+            </tal:block>
+            <tal:block condition="context/end">
+                <span i18n:translate="label_and_ends_at">and ends at</span>
+                <span tal:content="python:context.end.strftime('%d.%m.%Y %X')" />
+            </tal:block>.
         </div>
+        
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 

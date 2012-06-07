@@ -131,6 +131,12 @@ class ITalk(form.Schema):
                 default=True
         )
     
+    dexterity.read_permission(reviewNotes='cmf.ReviewPortalContent')
+    dexterity.write_permission(reviewNotes='cmf.ReviewPortalContent')
+    reviewNotes = schema.Text(
+            title=u"Review notes",
+            required=False,
+        )
 
 
 #    @invariant

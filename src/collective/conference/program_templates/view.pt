@@ -52,7 +52,6 @@
         <td tal:condition="item/room">
             <label i18n:translate="room">Room:</label>
             <span tal:content="item/room/to_object/Title | nothing" />
-            
         </td>
         
           
