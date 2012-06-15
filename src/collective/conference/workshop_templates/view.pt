@@ -28,6 +28,20 @@
             <span tal:content="context/speaker/to_object/Title | nothing" />
         </div>
 
+ 
+        <div tal:condition="context/length">
+            <label i18n:translate="length">Length of the Talk:</label>
+            <span tal:content="context/length | nothing" />
+            <span>minutes</span>
+        </div>
+
+        <div class="talkroom">
+        
+         <label i18n:translate="label_room">Room:</label>
+           <span tal:content="context/room/to_object/Title | nothing"/>
+        </div>
+
+
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
         <div tal:content="structure view/w/details/render" />

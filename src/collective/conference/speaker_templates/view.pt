@@ -33,12 +33,11 @@
         <div tal:define="picture nocall:context/picture"
              tal:condition="nocall:picture"
              class="conference-speaker-image">
-            <img tal:attributes="src string:${context/absolute_url}/@@download/picture/${picture/filename};
-                                 height picture/_height | nothing;
-                                 width picture/_width | nothing;"
-                />
+        <img tal:define="scale context/@@images"
+             tal:replace="structure python: scale.scale('picture',
+                  width=100, height=200, direction='down').tag()" />
         </div>
-
+ 
         <div tal:content="structure context/bio/output | string:" />
 
         <div tal:replace="structure provider:plone.belowcontentbody" />

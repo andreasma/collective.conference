@@ -30,8 +30,8 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 
 
-class StartBeforeEnd(Invalid):
-    __doc__ = _(u"The start or end date is invalid")
+# class StartBeforeEnd(Invalid):
+#     __doc__ = _(u"The start or end date is invalid")
 
 
 class IWorkshop(form.Schema):
@@ -102,10 +102,12 @@ class IWorkshop(form.Schema):
         )
   
 
-      
+    dexterity.write_permission(order='collective.conference.ModifyTrack')        
     order=schema.Int(
            title=_(u"Orderintrack"),               
-           description=_(u"Order in the track: write in an Integer"),
+           description=_(u"Order in the track: write in an Integer from 1 to 12"),
+           min=1,
+           max=12,
            required=False,
         )
                     
