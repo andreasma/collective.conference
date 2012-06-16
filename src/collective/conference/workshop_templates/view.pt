@@ -27,7 +27,16 @@
             <label i18n:translate="workshop_leader">Leader of the Workshop:</label>
             <span tal:content="context/speaker/to_object/Title | nothing" />
         </div>
-
+        <div tal:condition="context/speaker2">
+            <label i18n:translate="workshop_coleader">Co-Leader of the Workshop:</label>
+            <span tal:content="context/speaker2/to_object/Title | nothing" />
+            
+        </div>
+        <div tal:condition="context/track">
+            <label i18n:translate="track">Track:</label>
+            <span tal:content="context/track/to_object/Title | nothing" />
+        </div>
+        
  
         <div tal:condition="context/length">
             <label i18n:translate="length">Length of the Talk:</label>

@@ -79,6 +79,8 @@ class ITalk(form.Schema):
             source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
             required=False,
         )
+ 
+    
     form.widget(track=AutocompleteFieldWidget)
     track = RelationChoice(
             title=_(u"Track"),

@@ -24,9 +24,18 @@
         <p class="documentDescription" tal:content="context/description" />
 
         <div tal:condition="context/speaker">
-            <label i18n:translate="speaker">Speaker:</label>
+            <label i18n:translate="presenter">Presenter:</label>
             <span tal:content="context/speaker/to_object/Title | nothing" />
             
+        </div>
+        <div tal:condition="context/speaker2">
+            <label i18n:translate="co_presenter">Co-Presenter:</label>
+            <span tal:content="context/speaker2/to_object/Title | nothing" />
+            
+        </div>
+        <div tal:condition="context/track">
+            <label i18n:translate="track">Track:</label>
+            <span tal:content="context/track/to_object/Title | nothing" />
         </div>
         
         <div tal:condition="context/length">

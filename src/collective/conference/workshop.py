@@ -63,13 +63,13 @@ class IWorkshop(form.Schema):
     # use an autocomplete selection widget instead of the default content tree
     form.widget(speaker=AutocompleteFieldWidget)
     speaker = RelationChoice(
-            title=_(u"Presenter"),
+            title=_(u"Leader of the workshop"),
             source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
             required=False,
         )
     form.widget(speaker=AutocompleteFieldWidget)
     speaker2 = RelationChoice(
-            title=_(u"Co-Presenter"),
+            title=_(u"Co-Leader of the workshop"),
             source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
             required=False,
         )
@@ -117,6 +117,21 @@ class IWorkshop(form.Schema):
             description=_(u"Please upload your workshop presentation or material about the content of the workshop."),
             required=False,
         )    
+    
+    
+    creativecommonslicense= schema.Bool(
+            title=_(u'label_creative_commons_license', default=u'License is Creative Commons Attribution-Share Alike 3.0 License.'),
+                description=_(u'help_creative_commons_license', default=u'You agree that your talk and slides are provided under the Creative Commons Attribution-Share Alike 3.0 License.'),
+                default=True
+        )
+    
+    dexterity.read_permission(reviewNotes='cmf.ReviewPortalContent')
+    dexterity.write_permission(reviewNotes='cmf.ReviewPortalContent')
+    reviewNotes = schema.Text(
+            title=u"Review notes",
+            required=False,
+        )
+
     
 #    @invariant
 #    def validateStartEnd(data):
