@@ -111,7 +111,7 @@ class ITalk(form.Schema):
             vocabulary=length,
             required=True,
         )
-    dexterity.write_permission(order='collective.conference.ModifyTrack')  
+    dexterity.read_permission(order='collective.conference.ModifyTrack')  
     order=schema.Int(
            title=_(u"Orderintrack"),               
            description=_(u"Order in the track: write in an Integer from 1 to 12"),
