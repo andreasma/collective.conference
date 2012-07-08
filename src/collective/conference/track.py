@@ -30,6 +30,14 @@ from Products.CMFCore.utils import getToolByName
 
 from collective.conference.room import IRoom
 
+from zope.intid.interfaces import IIntIds
+from zc.relation.interfaces import ICatalog
+from zope import component
+
+
+
+
+
 
 
 class StartBeforeEnd(Invalid):
@@ -84,16 +92,18 @@ class ITrack(form.Schema):
 #            title= _(u"Room"),
 #        )
     
-    
-    
+    def startTimeTalk(data):
+        if data.start is not None:
+            talkstart = data.start
+            return datetime.datetime.talkstart()
+ 
     @invariant
     def validateStartEnd(data):
         if data.start is not None and data.end is not None:
             if data.start > data.end:
                 raise StartBeforeEnd(_(
                     u"The start date must be before the end date."))
-                
-    
+ 
 #    @invariant
 #   def validateStartNotBeforeProgram(data):
 #        if data.start is not None:
@@ -101,6 +111,26 @@ class ITrack(form.Schema):
 #            if data.start < datetime(startprogram):
 #                raise StartBeforeConferenceProgram(_(
 #                    u"The start date could not before the begin of the conference program."))
+
+@indexer(ITrack)
+def roomsIndexer(obj):
+    return obj.rooms
+grok.global_adapter(roomsIndexer, name="Subject")
+
+def setdates(item):
+    if not item.track:
+        return
+    catalog = component.getUtility(ICatalog)
+    intids = component.getUtility(IIntIds)
+    items = [intids.queryObject(rel.from_id) for rel in catalog.findRelations({'to_id': intids.getId(item.track.to_object),
+                                                                                #'from_interfaces_flattened': ITalk 
+                                                                                })]
+    start = item.track.to_object.start
+    for t in items:
+        t.startitem=start
+        t.enditem=t.startitem + datetime.timedelta(minutes=int(t.length))
+        start = t.enditem
+
                 
 class View(dexterity.DisplayForm):
     grok.context(ITrack)

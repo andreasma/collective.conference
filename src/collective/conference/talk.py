@@ -29,6 +29,10 @@ from plone.namedfile.field import NamedBlobFile
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.schema.interfaces import Bool
 from Products.CMFCore.utils import getToolByName
+from zope.app.container.interfaces import IObjectAddedEvent
+from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+
+from collective.conference.track import setdates
 
 
 # class StartBeforeEnd(Invalid):
@@ -88,18 +92,22 @@ class ITalk(form.Schema):
             required=False,
         )
 
-#    
-#    start = schema.Datetime(
-#            title=_(u"Startdate"),
-#            description =_(u"Start date"),
-#            required=False,
-#        )
-#
-#    end = schema.Datetime(
-#            title=_(u"Enddate"),
-#            description =_(u"End date"),
-#            required=False,
-#        )
+
+    dexterity.write_permission(startitem='cmf.ReviewPortalContent')
+    startitem = schema.Datetime(
+            title=_(u"Startdate"),
+            description =_(u"Start date"),
+            required=False,
+        )
+    
+
+    dexterity.write_permission(enditem='cmf.ReviewPortalContent')
+    enditem = schema.Datetime(
+            title=_(u"Enddate"),
+            description =_(u"End date"),
+            required=False,
+        )
+    
 #    talktrack= schema.Choice(
 #               title=_(u"Choose the Track for the Talk"),
 #               vocabulary=talktrack,
@@ -133,6 +141,12 @@ class ITalk(form.Schema):
                 default=True
         )
     
+    messagetocommittee = schema.Text (
+            title=_(u'Messages to the Program Committee'),
+            description=_(u'You can give some information to the committee here, e.g. about days you are (not) available to give the talk'),
+            required=False,                     
+        )
+    
     dexterity.read_permission(reviewNotes='cmf.ReviewPortalContent')
     dexterity.write_permission(reviewNotes='cmf.ReviewPortalContent')
     reviewNotes = schema.Text(
@@ -140,6 +154,16 @@ class ITalk(form.Schema):
             required=False,
         )
 
+
+    
+@grok.subscribe(ITalk, IObjectAddedEvent)
+def talkaddedevent(talk, event):
+    setdates(talk)
+
+@grok.subscribe(ITalk, IObjectModifiedEvent)
+def talkmodifiedevent(talk, event):
+    setdates(talk)
+    
 
 #    @invariant
 #    def validateStartEnd(data):

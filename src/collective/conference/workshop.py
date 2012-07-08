@@ -27,6 +27,10 @@ from collective.conference.track import ITrack
 from plone.namedfile.field import NamedBlobFile
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
+from collective.conference.track import setdates
+from zope.app.container.interfaces import IObjectAddedEvent
+from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+
 
 
 
@@ -82,17 +86,17 @@ class IWorkshop(form.Schema):
     
         
     
-#    start = schema.Datetime(
-#            title=_(u"Startdate"),
-#            description =_(u"Start date"),
-#            required=False,
-#        )
-#
-#    end = schema.Datetime(
-#            title=_(u"Enddate"),
-#            description =_(u"End date"),
-#            required=False,
-#        )
+    startitem = schema.Datetime(
+            title=_(u"Startdate"),
+            description =_(u"Start date"),
+            required=False,
+        )
+
+    enditem = schema.Datetime(
+            title=_(u"Enddate"),
+            description =_(u"End date"),
+            required=False,
+        )
     
             
     length= schema.Choice(
@@ -125,6 +129,14 @@ class IWorkshop(form.Schema):
                 default=True
         )
     
+        
+    messagetocommittee = schema.Text (
+            title=_(u'Messages to the Program Committee'),
+            description=_(u'You can give some information to the committee here, e.g. about days you are (not) available to give the workshop'),
+            required=False,                     
+        )
+    
+    
     dexterity.read_permission(reviewNotes='cmf.ReviewPortalContent')
     dexterity.write_permission(reviewNotes='cmf.ReviewPortalContent')
     reviewNotes = schema.Text(
@@ -140,7 +152,15 @@ class IWorkshop(form.Schema):
 #                raise StartBeforeEnd(_(
 #                    u"The start date must be before the end date."))
                 
+    
+@grok.subscribe(IWorkshop, IObjectAddedEvent)
+def workshopaddedevent(workshop, event):
+    setdates(workshop)
 
+@grok.subscribe(IWorkshop, IObjectModifiedEvent)
+def workshopmodifiedevent(workshop, event):
+    setdates(workshop)
+    
 
 
 class View(dexterity.DisplayForm):
