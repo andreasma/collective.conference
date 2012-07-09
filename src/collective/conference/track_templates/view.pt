@@ -51,12 +51,11 @@
         <tr bgcolor="#EEEEEE" tal:condition="repeat/item/even">
           <td><h4><span tal:content="item/order">Order</span>  <a tal:attributes="href item/getId"
        tal:content="item/Title" /></h4></td>
-         <td tal:condition="item/room">
-            
-            <span tal:content="item/room/to_object/Title | nothing" />
- 
+         
+        <td tal:condition="item/room">
+            <a tal:attributes="href item/room/to_object/absolute_url"><span tal:content="item/room/to_object/Title | nothing" /></a>
         </td>
-       
+ 
         <td>          
             <span tal:condition="item/startitem" tal:content="python:item.startitem.strftime('%H:%M')" /> -       
             <span tal:condition="item/enditem" tal:content="python:item.enditem.strftime('%H:%M')"  />
@@ -70,9 +69,7 @@
           <td><h4><span tal:content="item/order">Order</span>  <a tal:attributes="href item/getId"
        tal:content="item/Title" /></h4></td>
         <td tal:condition="item/room">
-           
-            <span tal:content="item/room/to_object/Title | nothing" />
-            <a tal:attributes="href item/room/to_object/Title"  />
+            <a tal:attributes="href item/room/to_object/absolute_url"><span tal:content="item/room/to_object/Title | nothing" /></a>
         </td>
         <td>          
             <span tal:condition="item/startitem" tal:content="python:item.startitem.strftime('%H:%M')" /> -       
