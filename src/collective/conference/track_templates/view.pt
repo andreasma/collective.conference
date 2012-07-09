@@ -40,21 +40,28 @@
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
         <table border="0" width="100%">
-        
+        <tr bgcolor="#18A303">
+         <th><label i18n:translate="talk_workshop">Talk/Workshop</label></th>
+         <th><label i18n:translate="room">Room</label></th>
+         <th><label i18n:translate="time">Time</label></th>
+         <th><label i18n:translate="subject_of_the_talk">Subject of the talk</label></th>
+         </tr>
          <tbody tal:repeat="item container/values">
+         
         <tr bgcolor="#EEEEEE" tal:condition="repeat/item/even">
           <td><h4><span tal:content="item/order">Order</span>  <a tal:attributes="href item/getId"
        tal:content="item/Title" /></h4></td>
          <td tal:condition="item/room">
-            <label i18n:translate="room">Room:</label>
-            <span tal:content="item/room/to_object/Title | nothing" />
             
+            <span tal:content="item/room/to_object/Title | nothing" />
+ 
         </td>
-        <td tal:condition="item/length">
-            <span tal:content="item/length | nothing" />
-            <span>minutes</span>
+       
+        <td>          
+            <span tal:condition="item/startitem" tal:content="python:item.startitem.strftime('%H:%M')" /> -       
+            <span tal:condition="item/enditem" tal:content="python:item.enditem.strftime('%H:%M')"  />
         </td>
-  
+         
 
        <td tal:content="item/Description">Description</td>
           
@@ -63,14 +70,16 @@
           <td><h4><span tal:content="item/order">Order</span>  <a tal:attributes="href item/getId"
        tal:content="item/Title" /></h4></td>
         <td tal:condition="item/room">
-            <label i18n:translate="room">Room:</label>
+           
             <span tal:content="item/room/to_object/Title | nothing" />
-            
+            <a tal:attributes="href item/room/to_object/Title"  />
         </td>
-        <td tal:condition="item/length">
-            <span tal:content="item/length | nothing" />
-            <span>minutes</span>
+        <td>          
+            <span tal:condition="item/startitem" tal:content="python:item.startitem.strftime('%H:%M')" /> -       
+            <span tal:condition="item/enditem" tal:content="python:item.enditem.strftime('%H:%M')"  />
         </td>
+         
+
  
        <td tal:content="item/Description">Description</td>   
         </tr>

@@ -22,7 +22,7 @@
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
         <p class="documentDescription" tal:content="context/description" />
-
+        
         <div tal:condition="context/speaker">
             <label i18n:translate="presenter">Presenter:</label>
             <span tal:content="context/speaker/to_object/Title | nothing" />
@@ -36,6 +36,13 @@
         <div tal:condition="context/track">
             <label i18n:translate="track">Track:</label>
             <span tal:content="context/track/to_object/Title | nothing" />
+        </div>
+        
+        <div>
+             <label i18n:translate="time">Time:</label>
+             
+             <span tal:condition="context/startitem" tal:content="python:context.startitem.strftime('%d.%m.%Y from %H:%M to ')" /> 
+             <span tal:condition="context/enditem" tal:content="python:context.enditem.strftime('%H:%M  o\'Clock')" /> 
         </div>
         
         <div tal:condition="context/length">

@@ -36,8 +36,12 @@
             <label i18n:translate="track">Track:</label>
             <span tal:content="context/track/to_object/Title | nothing" />
         </div>
-        
- 
+        <div>
+             <label i18n:translate="time">Time:</label>
+             
+             <span tal:condition="context/startitem" tal:content="python:context.startitem.strftime('%d.%m.%Y from %H:%M to ')" />
+             <span tal:condition="context/enditem" tal:content="python:context.enditem.strftime('%H:%M  o\'Clock')" />
+        </div>
         <div tal:condition="context/length">
             <label i18n:translate="length">Length of the Talk:</label>
             <span tal:content="context/length | nothing" />
