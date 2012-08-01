@@ -11,5 +11,10 @@
         id="collective.conference.ModifyTrack"
         title="collective.conference: Modify track"
         />
+        
+    <permission
+        id="collective.conference.AddAttendee"
+        title="collective.conference: Add attendee"
+        />
 
 </configure>

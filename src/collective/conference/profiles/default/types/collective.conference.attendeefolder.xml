@@ -3,7 +3,7 @@
    i18n:domain="collective.conference" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
  <!-- Basic metadata -->
- <property name="title" i18n:translate="">Attendee of  the Conference</property>
+ <property name="title" i18n:translate="">Folder for / Registration of the Conference Attendees</property>
  <property name="description" i18n:translate="">The attendee of the conference</property>
  <property name="content_icon">++resource++collective.conference/group.gif</property>
  <property name="allow_discussion">True</property>

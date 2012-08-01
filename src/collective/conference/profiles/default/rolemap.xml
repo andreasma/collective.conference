@@ -11,5 +11,11 @@
       <role name="Manager"/>
       <role name="Reviewer"/>
     </permission>
+    <permission name="collective.conference: Add attendee" acquire="True">
+      <role name="Owner"/>
+      <role name="Manager"/>
+      <role name="Member"/>
+      <role name="Contributor"/>
+    </permission>
   </permissions>
-</rolemap>
+  </rolemap>
