@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.conference">
+
+<head>
+    <metal:block fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css"
+            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+            tal:attributes="href string:${navroot}/++resource++collective.conference/conference.css"
+            />
+    </metal:block>
+</head>
+
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 class="documentFirstHeading" tal:content="context/title" />
+        <div class=ccattendee>
+        <ul>
+        <li tal:content="context/street" />
+        <li><span tal:content="context/postalcode" /> <span tal:content="context/city" /></li>
+        <li tal:content="context/country" />
+        <li tal:content="context/email" />
+        <li tal:condition="context/organisation" tal:content="context/organisation | nothing" />
+        <tal:block condition="context/paymentway">
+        <li> <span>Registration fee paid: <span tal:content="context/paymentway | nothing" /></li>
+        </tal:block>
+        <tal:block condition="context/usedbank">
+        <li> <span>Bank used for the payment: <span tal:content="context/usedbank | nothing" /></li>
+        </tal:block>
+                
+        </ul>
+        
+        
+        </div>
+
+        
+
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>
