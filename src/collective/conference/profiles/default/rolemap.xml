@@ -17,7 +17,6 @@
       <role name="Member"/>
       <role name="Contributor"/>
     </permission>
-    <permission>
     <permission name="collective.conference: Modify talktime" acquire="True">
       <role name="Manager" />
     </permission>
