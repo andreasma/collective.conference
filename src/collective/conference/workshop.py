@@ -85,13 +85,14 @@ class IWorkshop(form.Schema):
         )
     
         
-    
+    dexterity.write_permission(startitem='collective.conference.ModifyTalktime')    
     startitem = schema.Datetime(
             title=_(u"Startdate"),
             description =_(u"Start date"),
             required=False,
         )
 
+    dexterity.write_permission(enditem='collective.conference.ModifyTalktime')
     enditem = schema.Datetime(
             title=_(u"Enddate"),
             description =_(u"End date"),
@@ -106,7 +107,7 @@ class IWorkshop(form.Schema):
         )
   
 
-    dexterity.read_permission(order='collective.conference.ModifyTrack')        
+    dexterity.write_permission(order='collective.conference.ModifyTrack')        
     order=schema.Int(
            title=_(u"Orderintrack"),               
            description=_(u"Order in the track: write in an Integer from 1 to 12"),
@@ -118,7 +119,7 @@ class IWorkshop(form.Schema):
     
     slides = NamedBlobFile(
             title=_(u"Workshop slides / material"),
-            description=_(u"Please upload your workshop presentation or material about the content of the workshop."),
+            description=_(u"Please upload your workshop presentation or material about the content of the workshop in front or short after you have given the workshop."),
             required=False,
         )    
     
