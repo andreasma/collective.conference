@@ -93,7 +93,7 @@ class ITalk(form.Schema):
         )
 
 
-    dexterity.write_permission(startitem='cmf.ReviewPortalContent')
+    dexterity.write_permission(startitem='collective.conference.ModifyTalktime')
     startitem = schema.Datetime(
             title=_(u"Startdate"),
             description =_(u"Start date"),
@@ -101,7 +101,7 @@ class ITalk(form.Schema):
         )
     
 
-    dexterity.write_permission(enditem='cmf.ReviewPortalContent')
+    dexterity.write_permission(enditem='collective.conference.ModifyTalktime')
     enditem = schema.Datetime(
             title=_(u"Enddate"),
             description =_(u"End date"),
@@ -119,7 +119,7 @@ class ITalk(form.Schema):
             vocabulary=length,
             required=True,
         )
-    dexterity.read_permission(order='collective.conference.ModifyTrack')  
+    dexterity.write_permission(order='collective.conference.ModifyTrack')  
     order=schema.Int(
            title=_(u"Orderintrack"),               
            description=_(u"Order in the track: write in an Integer from 1 to 12"),
@@ -131,7 +131,7 @@ class ITalk(form.Schema):
     
     slides = NamedBlobFile(
             title=_(u"Presentation slides"),
-            description=_(u"Please upload your presentation"),
+            description=_(u"Please upload your presentation shortly after you have given your talk."),
             required=False,
         )
     

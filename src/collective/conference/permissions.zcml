@@ -16,5 +16,10 @@
         id="collective.conference.AddAttendee"
         title="collective.conference: Add attendee"
         />
+    
+    <permission
+        id="collective.conference.ModifyTalktime"
+        title="collective.conference: Modify talktime"
+        />
 
 </configure>
