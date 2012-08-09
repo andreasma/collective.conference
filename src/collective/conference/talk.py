@@ -44,7 +44,8 @@ class ITalk(form.Schema):
     """
     
     length = SimpleVocabulary(
-       [SimpleTerm(value=u'30', title=_(u'30 minutes')),
+       [SimpleTerm(value=u'15', title=_(u'15 minutes')),
+        SimpleTerm(value=u'30', title=_(u'30 minutes')),
         SimpleTerm(value=u'45', title=_(u'45 minutes')),
         SimpleTerm(value=u'60', title=_(u'60 minutes'))]
         )
