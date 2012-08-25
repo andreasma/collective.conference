@@ -65,7 +65,7 @@ class ITrack(form.Schema):
             title=_(u"Track details"),
             required=False
         )
-    
+
 
     start = schema.Datetime(
             title=_(u"Startdate"),
@@ -85,25 +85,25 @@ class ITrack(form.Schema):
             source=ObjPathSourceBinder(object_provides=IRoom.__identifier__),
             required=False,
         )
-        
 
-    
+
+
 #    room = schema.TextLine(
 #            title= _(u"Room"),
 #        )
-    
+
     def startTimeTalk(data):
         if data.start is not None:
             talkstart = data.start
             return datetime.datetime.talkstart()
- 
+
     @invariant
     def validateStartEnd(data):
         if data.start is not None and data.end is not None:
             if data.start > data.end:
                 raise StartBeforeEnd(_(
                     u"The start date must be before the end date."))
- 
+
 #    @invariant
 #   def validateStartNotBeforeProgram(data):
 #        if data.start is not None:
@@ -123,7 +123,7 @@ def setdates(item):
     catalog = component.getUtility(ICatalog)
     intids = component.getUtility(IIntIds)
     items = [intids.queryObject(rel.from_id) for rel in catalog.findRelations({'to_id': intids.getId(item.track.to_object),
-                                                                                #'from_interfaces_flattened': ITalk 
+                                                                                #'from_interfaces_flattened': ITalk
                                                                                 })]
     start = item.track.to_object.start
     for t in items:
@@ -131,10 +131,18 @@ def setdates(item):
         t.enditem=t.startitem + datetime.timedelta(minutes=int(t.length))
         start = t.enditem
 
-                
+
 class View(dexterity.DisplayForm):
     grok.context(ITrack)
     grok.require('zope2.View')
 
     def canRequestReview(self):
         return checkPermission('cmf.RequestReview', self.context)
+
+    def talks(self):
+        catalog = getToolByName(self.context, "portal_catalog")
+        talks = catalog.searchResults(
+            path=dict(query='/'.join(self.context.getPhysicalPath()),
+            depth=1),
+            sort_on='getObjPositionInParent')
+        return [x.getObject() for x in talks]

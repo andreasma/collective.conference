@@ -13,11 +13,11 @@
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
         <h1 class="documentFirstHeading" tal:content="context/title" />
-  
-        
+
+
         <div class="discreet">
         <p><span i18n:translate="label_the">The</span> <span tal:content="context/title" />
-           
+
             <tal:block condition="context/start">
                 <span i18n:translate="label_begins_at"> begins at</span>
                 <span tal:content="python:context.start.strftime('%d.%m.%Y %X')" />
@@ -27,7 +27,7 @@
                 <span tal:content="python:context.end.strftime('%d.%m.%Y %X')" />
             </tal:block>.
         </div>
-        
+
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
@@ -46,44 +46,44 @@
          <th><label i18n:translate="time">Time</label></th>
          <th><label i18n:translate="subject_of_the_talk">Subject of the talk</label></th>
          </tr>
-         <tbody tal:repeat="item container/values">
-         
-        <tr bgcolor="#EEEEEE" tal:condition="repeat/item/even">
-          <td><h4><span tal:content="item/order">Order</span>  <a tal:attributes="href item/getId"
-       tal:content="item/Title" /></h4></td>
-         
-        <td tal:condition="item/room">
-            <a tal:attributes="href item/room/to_object/absolute_url"><span tal:content="item/room/to_object/Title | nothing" /></a>
-        </td>
- 
-        <td>          
-            <span tal:condition="item/startitem" tal:content="python:item.startitem.strftime('%H:%M')" /> -       
-            <span tal:condition="item/enditem" tal:content="python:item.enditem.strftime('%H:%M')"  />
-        </td>
-         
+         <tbody tal:repeat="talk view/talks">
 
-       <td tal:content="item/Description">Description</td>
-          
+        <tr bgcolor="#EEEEEE" tal:condition="repeat/talk/even">
+          <td><h4>  <a tal:attributes="href talk/getId"
+       tal:content="talk/Title" /></h4></td>
+
+        <td tal:condition="talk/room">
+            <a tal:attributes="href talk/room/to_object/absolute_url"><span tal:content="talk/room/to_object/Title | nothing" /></a>
+        </td>
+
+        <td>
+            <span tal:condition="talk/startitem" tal:content="python:talk.startitem.strftime('%H:%M')" /> -
+            <span tal:condition="talk/enditem" tal:content="python:talk.enditem.strftime('%H:%M')"  />
+        </td>
+
+
+       <td tal:content="talk/Description">Description</td>
+
         </tr>
-         <tr tal:condition="repeat/item/odd">
-          <td><h4><span tal:content="item/order">Order</span>  <a tal:attributes="href item/getId"
-       tal:content="item/Title" /></h4></td>
-        <td tal:condition="item/room">
-            <a tal:attributes="href item/room/to_object/absolute_url"><span tal:content="item/room/to_object/Title | nothing" /></a>
+         <tr tal:condition="repeat/talk/odd">
+          <td><h4>  <a tal:attributes="href talk/getId"
+       tal:content="talk/Title" /></h4></td>
+        <td tal:condition="talk/room">
+            <a tal:attributes="href talk/room/to_object/absolute_url"><span tal:content="talk/room/to_object/Title | nothing" /></a>
         </td>
-        <td>          
-            <span tal:condition="item/startitem" tal:content="python:item.startitem.strftime('%H:%M')" /> -       
-            <span tal:condition="item/enditem" tal:content="python:item.enditem.strftime('%H:%M')"  />
+        <td>
+            <span tal:condition="talk/startitem" tal:content="python:talk.startitem.strftime('%H:%M')" /> -
+            <span tal:condition="talk/enditem" tal:content="python:talk.enditem.strftime('%H:%M')"  />
         </td>
-         
 
- 
-       <td tal:content="item/Description">Description</td>   
+
+
+       <td tal:content="talk/Description">Description</td>
         </tr>
         </tbody>
       </table>
-        
-        
+
+
 
     </tal:main-macro>
 </metal:main>
