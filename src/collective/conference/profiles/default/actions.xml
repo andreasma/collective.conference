@@ -16,12 +16,7 @@
            </property>
            <property name="visible">True</property>
       </object>
-      
-      <!-- Disable the built-in contact action -->
-      <object name="contact">
-         <property name="visible">False</property>
-      </object>
-       
+
    </object>
 
 </object>
