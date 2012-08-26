@@ -46,7 +46,7 @@ City: %(city)s
 Postalcode: %(postalcode)s
 Country: %(country)s
 Organisation: %(organisation)s
-Position: %(postion)s
+Position: %(position)s
 Conference Fee payed?: %(conferencefeepaid)s
 Way of Payment: %(paymentway)s
 Used Bank: %(usedbank)s
