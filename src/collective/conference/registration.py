@@ -46,6 +46,7 @@ City: %(city)s
 Postalcode: %(postalcode)s
 Country: %(country)s
 Organisation: %(organisation)s
+Position: %(postion)s
 Conference Fee payed?: %(conferencefeepaid)s
 Way of Payment: %(paymentway)s
 Used Bank: %(usedbank)s
@@ -112,6 +113,10 @@ class IRegistrationForm(Interface):
             title=_(u"Organisation"),
             required=False,
         )
+    position = schema.TextLine(
+            title=_(u"Position in your organisation"),
+            required=False,
+        )
         
     conferencefeepaid = schema.Choice(
            title=_(u"Did you already pay the conference fee?"),
@@ -165,7 +170,7 @@ class IRegistrationForm(Interface):
     captcha = schema.TextLine(
             title=_(u"ReCaptcha"),
             description=_(u""),
-            required=True
+            required=False
         )
         
 
