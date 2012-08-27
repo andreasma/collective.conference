@@ -222,7 +222,7 @@ class RegistrationForm(form.Form):
         subject = "%s %s" % (data['firstname'], data['name'])
         message = MESSAGE_TEMPLATE % data
 
-        mailhost.send(message, mto=toAddress, mfrom=str(source), subject=subject)
+        mailhost.send(message, mto=toAddress, mfrom=str(source), subject=subject, charset='utf8')
         
         # Issue a status message
         confirm = _(u"Thank you! Your registration has been received and we will send you a confirmation mail as soon as posible.")
