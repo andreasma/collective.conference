@@ -45,7 +45,10 @@ class IWorkshop(form.Schema):
     length = SimpleVocabulary(
        [SimpleTerm(value=u'30', title=_(u'30 minutes')),
         SimpleTerm(value=u'45', title=_(u'45 minutes')),
-        SimpleTerm(value=u'60', title=_(u'60 minutes'))]
+        SimpleTerm(value=u'60', title=_(u'60 minutes')),
+        SimpleTerm(value=u'120', title=_(u'120 minutes')),
+        SimpleTerm(value=u'180', title=_(u'180 minutes')),
+        SimpleTerm(value=u'240', title=_(u'240 minutes')),]
         )
     
 
