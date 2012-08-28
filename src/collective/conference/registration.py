@@ -127,7 +127,7 @@ class IRegistrationForm(Interface):
 
     paymentway=schema.Choice(
            title=_(u"Way of Registration Fee Payment 2"),
-           values=(u'Bank', u'PayPal', u'Check'),
+           values=(u'Bank', u'PayPal'),
            description=_(u"If you already payed the registration fee, please tell us, which way you used to transfer the money:"),
            required=False,
        )
