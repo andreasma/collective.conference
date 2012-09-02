@@ -38,6 +38,14 @@ class IRoomfolder(form.Schema):
             title=_(u"roomfolder description"),
         )
     
+    
+    form.primary('details')
+    details = RichText(
+            title=_(u"Information about the Conference Rooms"),
+            required=False
+        )
+
+    
 class View(dexterity.DisplayForm):
     grok.context(IRoomfolder)
     grok.require('zope2.View')
