@@ -55,7 +55,6 @@ IBAN: %(bankiban)s
 Country of the Bank: %(bankcountry)s
 
 Privacy Policy: %(privacypolicy)s
-Privacy Policy Text: %(privacypolicytext)s
 
 
 %(message)s
