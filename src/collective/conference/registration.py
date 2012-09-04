@@ -170,7 +170,7 @@ class IRegistrationForm(Interface):
         
     privacypolicy = schema.Bool(
             title=_(u"Agree with the above privacy policy"),
-            description=_(u"I agree with the terms of the privacy policy. / Ich willige in die Bedingungen der Datenschutzerklaerung ein."),                         
+            description=_(u"I agree with the terms of the privacy policy."),                         
             required=True,
             
        )
