@@ -41,6 +41,8 @@ MESSAGE_TEMPLATE = """\
 
 Registration from %(firstname)s  %(name)s <%(emailAddress)s>
 
+Firstname: %(firstname)s
+Name: %(name)s
 Street: %(street)s
 City: %(city)s
 Postalcode: %(postalcode)s
