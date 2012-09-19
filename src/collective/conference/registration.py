@@ -68,6 +68,15 @@ class IRegistrationForm(Interface):
     """Define the fields of our form
     """
 
+    
+    
+    conferencefeepayexplanation= schema.TextLine(
+            title =_(u"Before you fill this form, please pay the registration fee: http://conference.libreoffice.org/registration"),
+            description=_(u"(Accepted Speakers need to register as well, however thay do not need to pay the registration fee.)"),
+            readonly=True,
+            required=False,
+        )   
+
     name = schema.TextLine(
             title=_(u"Lastname"),
             description=_(u"Please fill in your lastname"),
@@ -131,8 +140,8 @@ class IRegistrationForm(Interface):
     
     
     conferencefeepayexplanation= schema.TextLine(
-            title =_(u"Imperative of Registration Fee Payment!"),
-            description=_(u"If you have not paid the conference fee yet and you are not an accepted speaker or organizer, please stop here and pay the registration fee first. If you have not paid the registration fee before the registration for the conference closes (except you had not to pay because you are a speaker or an organizer) your registration will be dropped and you will not get access to the conference!!"),
+            title =_(u"Before you fill this form, please pay the registration fee: http://conference.libreoffice.org/registration"),
+            description=_(u"(Accepted Speakers need to register as well, however thay do not need to pay the registration fee.)"),
             readonly=True,
             required=False,
         )   
