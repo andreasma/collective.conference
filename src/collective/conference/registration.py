@@ -72,7 +72,7 @@ class IRegistrationForm(Interface):
     
     conferencefeepayexplanation= schema.TextLine(
             title =_(u"Before you fill this form, please pay the registration fee: http://conference.libreoffice.org/registration"),
-            description=_(u"(Accepted Speakers need to register as well, however thay do not need to pay the registration fee.)"),
+            description=_(u"(Accepted Speakers need to register as well, however they do not need to pay the registration fee.)"),
             readonly=True,
             required=False,
         )   
@@ -137,14 +137,7 @@ class IRegistrationForm(Interface):
            description=_(u"If your answer is yes, please answer also the following question."),
            required=True,
        ) 
-    
-    
-    conferencefeepayexplanation= schema.TextLine(
-            title =_(u"Before you fill this form, please pay the registration fee: http://conference.libreoffice.org/registration"),
-            description=_(u"(Accepted Speakers need to register as well, however thay do not need to pay the registration fee.)"),
-            readonly=True,
-            required=False,
-        )   
+  
 
     paymentway=schema.Choice(
            title=_(u"Way of Registration Fee Payment 2"),
