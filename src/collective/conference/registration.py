@@ -127,7 +127,15 @@ class IRegistrationForm(Interface):
            values=(u'No', u'Yes'),
            description=_(u"If your answer is yes, please answer also the following question."),
            required=True,
-       )    
+       ) 
+    
+    
+    conferencefeepayexplanation= schema.TextLine(
+            title =_(u"Imperative of Registration Fee Payment!"),
+            description=_(u"If you have not paid the conference fee yet and you are not an accepted speaker or organizer, please stop here and pay the registration fee first. If you have not paid the registration fee before the registration for the conference closes (except you had not to pay because you are a speaker or an organizer) your registration will be dropped and you will not get access to the conference!!"),
+            readonly=True,
+            required=False,
+        )   
 
     paymentway=schema.Choice(
            title=_(u"Way of Registration Fee Payment 2"),
