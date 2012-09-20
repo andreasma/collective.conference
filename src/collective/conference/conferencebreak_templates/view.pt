@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.conference">
+
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <h1 class="documentFirstHeading" tal:content="context/title" />
+
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+        
+        
+        <div tal:condition="context/track">
+            <label i18n:translate="track">Track:</label>
+            <a tal:attributes="href context/track/to_object/absolute_url">
+            <span tal:content="context/track/to_object/Title | nothing" />
+            </a>
+        </div>
+        
+        <div>
+             <label i18n:translate="time">Time:</label>
+             
+             <span tal:condition="context/startitem" tal:content="python:context.startitem.strftime('%d.%m.%Y from %H:%M to ')" /> 
+             <span tal:condition="context/enditem" tal:content="python:context.enditem.strftime('%H:%M  o\'Clock')" /> 
+        </div>
+        
+        <div tal:condition="context/length">
+            <label i18n:translate="length">Length of the Break:</label>
+            <span tal:content="context/length | nothing" />
+            <span>minutes</span>
+        </div>
+        
+        
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+        <h4>Details of the Talk</h4>
+
+        <div tal:content="structure view/w/details/render" />
+
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+        
+        
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>
