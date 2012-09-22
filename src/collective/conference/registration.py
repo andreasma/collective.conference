@@ -36,10 +36,12 @@ def validateEmail(value):
         raise Invalid(_(u"Invalid email address"))
     return True
 
-def validatebooleantrue(value):
-    if not True:
-        raise Invalid(_(u"You had to agree with the privacy policy."))
+
+def validateAccept(value):
+    if not value == True:
+        raise Invalid(_(u"If you want to register for the conference you had to accept the Privacy Policy above."))
     return True
+
 
 MESSAGE_TEMPLATE = """\
 
@@ -188,7 +190,7 @@ class IRegistrationForm(Interface):
             title=_(u"Agree with the above privacy policy"),
             description=_(u"I agree with the terms of the privacy policy."),                         
             required=True,
-            constraint=validatebooleantrue
+            constraint=validateAccept
             
        )
 
