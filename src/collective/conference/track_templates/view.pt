@@ -56,7 +56,7 @@
             <a tal:attributes="href talk/room/to_object/absolute_url"><span tal:content="talk/room/to_object/Title | nothing" /></a>
         </td>
 
-        <td>
+        <td width="110px">
             <span tal:condition="talk/startitem" tal:content="python:talk.startitem.strftime('%H:%M')" /> -
             <span tal:condition="talk/enditem" tal:content="python:talk.enditem.strftime('%H:%M')"  />
         </td>
@@ -71,7 +71,7 @@
         <td tal:condition="talk/room">
             <a tal:attributes="href talk/room/to_object/absolute_url"><span tal:content="talk/room/to_object/Title | nothing" /></a>
         </td>
-        <td>
+        <td width="110px">
             <span tal:condition="talk/startitem" tal:content="python:talk.startitem.strftime('%H:%M')" /> -
             <span tal:condition="talk/enditem" tal:content="python:talk.enditem.strftime('%H:%M')"  />
         </td>
