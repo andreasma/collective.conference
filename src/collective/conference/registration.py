@@ -56,6 +56,7 @@ Country: %(country)s
 Organisation: %(organisation)s
 Position: %(position)s
 Conference Fee payed?: %(conferencefeepaid)s
+Accepted speaker at the conference: %(conferencespeaker)s
 Way of Payment: %(paymentway)s
 Used Bank: %(usedbank)s
 BIC: %(bankbic)s
@@ -141,6 +142,11 @@ class IRegistrationForm(Interface):
            title=_(u"Did you already pay the conference fee?"),
            values=(u'No', u'Yes'),
            description=_(u"If your answer is yes, please answer also the following question."),
+           required=True,
+       ) 
+    conferencespeaker = schema.Choice(
+           title=_(u"Are an accepted speaker at the conference?"),
+           values=(u'No', u'Yes'),
            required=True,
        ) 
   
