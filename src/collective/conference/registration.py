@@ -145,8 +145,9 @@ class IRegistrationForm(Interface):
            required=True,
        ) 
     conferencespeaker = schema.Choice(
-           title=_(u"Are an accepted speaker at the conference?"),
+           title=_(u"Are you an accepted speaker at the conference?"),
            values=(u'No', u'Yes'),
+           description=_(u"Answer only with yes, if you have received a acceptance message from the Program Committee for your talk or workshop at the conference! Otherwise you have to pay the registration fee."),
            required=True,
        ) 
   
