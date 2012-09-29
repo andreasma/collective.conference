@@ -23,11 +23,11 @@
         <div class="discreet">
             <tal:block condition="context/start">
                 <span i18n:translate="label_from">From:</span>
-                <span tal:content="python:context.start.strftime('%x %X')" />
+                <span tal:content="python:context.start.strftime('%d.%m.%Y %X')" />
             </tal:block>
             <tal:block condition="context/end">
                 <span i18n:translate="label_to">To:</span>
-                <span tal:content="python:context.end.strftime('%x %X')" />
+                <span tal:content="python:context.end.strftime('%d.%m.%Y %X')" />
             </tal:block>
         </div>
 
@@ -75,10 +75,10 @@
         
           
       <td><tal:block condition="item/start">
-           <span tal:content="python:item.start.strftime('%x %X')" />
+           <span tal:content="python:item.start.strftime('%d.%m.%Y %X')" />
        </tal:block></td>
        <td> <tal:block condition="item/end">
-                <span tal:content="python:item.end.strftime('%x %X')" />
+                <span tal:content="python:item.end.strftime('%d.%m.%Y %X')" />
        </tal:block></td>
        
           
@@ -95,10 +95,10 @@
             
       <td> <tal:block condition="item/start">
                 
-                <span tal:content="python:item.start.strftime('%x %X')" />
+                <span tal:content="python:item.start.strftime('%d.%m.%Y %X')" />
        </tal:block></td>
        <td> <tal:block condition="item/end">
-                <span tal:content="python:item.end.strftime('%x %X')" />
+                <span tal:content="python:item.end.strftime('%d.%m.%Y %X')" />
        </tal:block></td>
         
         </tr>
