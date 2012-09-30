@@ -20,11 +20,11 @@
 
             <tal:block condition="context/start">
                 <span i18n:translate="label_begins_at"> begins at</span>
-                <span tal:content="python:context.start.strftime('%d.%m.%Y %X')" />
+                <span tal:content="python:context.start.strftime('%d. %b %Y %H:%M')" />
             </tal:block>
             <tal:block condition="context/end">
                 <span i18n:translate="label_and_ends_at">and ends at</span>
-                <span tal:content="python:context.end.strftime('%d.%m.%Y %X')" />
+                <span tal:content="python:context.end.strftime('%d. %b %Y %H:%M')" />
             </tal:block>.
         </div>
 
