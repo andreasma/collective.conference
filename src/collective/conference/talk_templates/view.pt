@@ -41,8 +41,8 @@
         <div>
              <label i18n:translate="time">Time:</label>
              
-             <span tal:condition="context/startitem" tal:content="python:context.startitem.strftime('%d.%m.%Y from %H:%M to ')" /> 
-             <span tal:condition="context/enditem" tal:content="python:context.enditem.strftime('%H:%M  o\'Clock')" /> 
+             <span tal:condition="context/startitem" tal:content="python:context.startitem.strftime('%d.%b.%Y from %H:%M to ')" /> 
+             <span tal:condition="context/enditem" tal:content="python:context.enditem.strftime('%H:%M')" /> 
         </div>
         
         <div tal:condition="context/length">
