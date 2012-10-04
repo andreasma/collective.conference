@@ -259,7 +259,7 @@ class RegistrationForm(form.Form):
 
         # Construct and send a message
         toAddress = portal.getProperty('email_from_address')
-        source = "%s <%s>" % (data['name'], data['emailAddress'])
+        source = "%s <%s>" % ('Conference Registration Form', 'info@documentfoundation.org')
         subject = "%s %s" % (data['firstname'], data['name'])
         message = MESSAGE_TEMPLATE % data
 
