@@ -32,7 +32,7 @@ from Products.CMFCore.utils import getToolByName
 from zope.app.container.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
-from collective.conference.track import setdates
+#from collective.conference.track import setdates
 
 
 # class StartBeforeEnd(Invalid):
@@ -157,13 +157,13 @@ class ITalk(form.Schema):
 
 
     
-@grok.subscribe(ITalk, IObjectAddedEvent)
-def talkaddedevent(talk, event):
-    setdates(talk)
+#@grok.subscribe(ITalk, IObjectAddedEvent)
+#def talkaddedevent(talk, event):
+#    setdates(talk)
 
-@grok.subscribe(ITalk, IObjectModifiedEvent)
-def talkmodifiedevent(talk, event):
-    setdates(talk)
+#@grok.subscribe(ITalk, IObjectModifiedEvent)
+#def talkmodifiedevent(talk, event):
+#    setdates(talk)
     
 
 #    @invariant

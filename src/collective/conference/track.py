@@ -33,7 +33,7 @@ from collective.conference.room import IRoom
 from zope.intid.interfaces import IIntIds
 from zc.relation.interfaces import ICatalog
 from zope import component
-
+from zope.app.container.interfaces import IContainerModifiedEvent
 
 
 
@@ -117,20 +117,24 @@ def roomsIndexer(obj):
     return obj.rooms
 grok.global_adapter(roomsIndexer, name="Subject")
 
-def setdates(item):
-    if not item.track:
-        return
-    catalog = component.getUtility(ICatalog)
-    intids = component.getUtility(IIntIds)
-    items = [intids.queryObject(rel.from_id) for rel in catalog.findRelations({'to_id': intids.getId(item.track.to_object),
-                                                                                #'from_interfaces_flattened': ITalk
-                                                                                })]
-    start = item.track.to_object.start
-    for t in items:
-        t.startitem=start
-        t.enditem=t.startitem + datetime.timedelta(minutes=int(t.length))
-        start = t.enditem
+#def setdates(item):
+#    if not item.track:
+#        return
+#    catalog = component.getUtility(ICatalog)
+#    intids = component.getUtility(IIntIds)
+#    items = [intids.queryObject(rel.from_id) for rel in catalog.findRelations({'to_id': intids.getId(item.track.to_object),
+#                                                                                #'from_interfaces_flattened': ITalk
+#                                                                                })]
+#    start = item.track.to_object.start
+#    for t in items:
+#        t.startitem=start
+#        t.enditem=t.startitem + datetime.timedelta(minutes=int(t.length))
+#        start = t.enditem
 
+        
+@grok.subscribe(ITrack, IContainerModifiedEvent)
+def trackmodified(track, event):
+    print ("track modified")
 
 class View(dexterity.DisplayForm):
     grok.context(ITrack)

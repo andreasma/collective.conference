@@ -30,7 +30,7 @@ from Products.CMFCore.utils import getToolByName
 from zope.app.container.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
-from collective.conference.track import setdates
+# from collective.conference.track import setdates
 
 
 class IConferencebreak(form.Schema):
@@ -96,13 +96,13 @@ class IConferencebreak(form.Schema):
     
     
     
-@grok.subscribe(IConferencebreak, IObjectAddedEvent)
-def conferencebreakaddedevent(conferencebreak, event):
-    setdates(conferencebreak)
+#@grok.subscribe(IConferencebreak, IObjectAddedEvent)
+#def conferencebreakaddedevent(conferencebreak, event):
+#    setdates(conferencebreak)
 
-@grok.subscribe(IConferencebreak, IObjectModifiedEvent)
-def conferencebreakmodifiedevent(conferencebreak, event):
-    setdates(conferencebreak)
+#@grok.subscribe(IConferencebreak, IObjectModifiedEvent)
+#def conferencebreakmodifiedevent(conferencebreak, event):
+#    setdates(conferencebreak)
     
 
 
