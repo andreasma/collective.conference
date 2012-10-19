@@ -1,3 +1,6 @@
+import re
+from zope.interface import Invalid
+
 from five import grok
 from zope import schema
 
@@ -10,6 +13,15 @@ from zope.app.container.interfaces import IObjectAddedEvent
 from Products.CMFCore.utils import getToolByName
 
 from collective.conference import _
+
+
+checkEmail = re.compile(
+     r"[a-zA-Z0-9._%-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4}").match
+     
+def validateEmail(value):
+    if not checkEmail(value):
+        raise Invalid(_(u"Invalid email address"))
+    return True
 
 class ISpeaker(form.Schema):
     """A conference speaker or leader of a workshop. Speaker can be added anywhere.
@@ -52,8 +64,9 @@ class ISpeaker(form.Schema):
               required=False,
         )        
 
-    email = schema.TextLine(
-            title=_(u"E-Mail"),
+    emailAddress = schema.ASCIILine(
+            title=_(u"Your email address"),
+            constraint=validateEmail,
             required=True,
         )
 
@@ -101,7 +114,7 @@ def notifyUser(speaker, event):
         return
 
     subject = "Is this you?"
-    message = "A speaker /leader of a workshop called %s was added here %s" % (speaker.title, speaker.absolute_url(),)
+    message = "A speaker /leader of a workshop called %s was added here %s. If this is you, everything is fine." % (speaker.title, speaker.absolute_url(),)
 
     matching_users = acl_users.searchUsers(fullname=speaker.title)
     for user_info in matching_users:
