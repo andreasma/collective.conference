@@ -30,16 +30,16 @@
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-        <div tal:define="picture nocall:context/picture"
+        <div width="200px" tal:define="picture nocall:context/picture"
              tal:condition="nocall:picture"
              class="conference-speaker-image">
         <img tal:define="scale context/@@images"
              tal:replace="structure python: scale.scale('picture',
-                  width=100, height=200, direction='down').tag()" />
+                  width=150, height=200, direction='down').tag()" />
         </div>
- 
+        
         <div tal:content="structure context/bio/output | string:" />
-
+        
         <div tal:replace="structure provider:plone.belowcontentbody" />
 
     </tal:main-macro>
