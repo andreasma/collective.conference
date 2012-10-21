@@ -64,7 +64,7 @@ class ISpeaker(form.Schema):
               required=False,
         )        
 
-    emailAddress = schema.ASCIILine(
+    email = schema.ASCIILine(
             title=_(u"Your email address"),
             constraint=validateEmail,
             required=True,
