@@ -85,6 +85,13 @@ class ITalk(form.Schema):
             required=False,
         )
  
+    form.widget(speaker=AutocompleteFieldWidget)
+    speaker3 = RelationChoice(
+            title=_(u"Co-Presenter"),
+            source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
+            required=False,
+        )
+ 
     
     form.widget(track=AutocompleteFieldWidget)
     track = RelationChoice(
@@ -133,6 +140,23 @@ class ITalk(form.Schema):
     slides = NamedBlobFile(
             title=_(u"Presentation slides"),
             description=_(u"Please upload your presentation shortly after you have given your talk."),
+            required=False,
+        )
+    
+    slides2 = NamedBlobFile(
+            title=_(u"Presentation slides"),
+            description=_(u"Please upload your presentation shortly after you have given your talk."),
+            required=False,
+        )
+
+    slides3 = schema.URI(
+            title=_(u"Link to the presentation slides"),
+            required=False,
+        )
+
+    files = NamedBlobFile(
+            title=_(u"Additional Files of your presentation."),
+            description=_(u"Please upload the additional files of your presentation (in archive format) shortly after you have given your talk."),
             required=False,
         )
     
