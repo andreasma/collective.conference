@@ -31,6 +31,12 @@
             <a tal:attributes="href context/speaker2/to_object/absolute_url"><span tal:content="context/speaker2/to_object/Title | nothing" /></a>
         </div>
 
+        <div tal:condition="context/speaker3">
+            <label i18n:translate="co_presenter">Co-Presenter:</label>
+            <a tal:attributes="href context/speaker3/to_object/absolute_url"><span tal:content="context/speaker2/to_object/Title | nothing" /></a>
+        </div>
+
+
         <div tal:condition="context/track">
             <label i18n:translate="track">Track:</label>
             <a tal:attributes="href context/track/to_object/absolute_url">
@@ -63,6 +69,44 @@
         <h4>Details of the Talk</h4>
 
         <div tal:content="structure view/w/details/render" />
+
+        <h4>Presentation Slides and additional files</h4>
+
+        <div tal:condition="context/slides">
+        <a tal:attributes="href string:${context/absolute_url}/@@download/slides/${context/slides/filename}">
+        Slides in ODT-File-Format</a>
+        </div>
+        <div tal:condition="context/slides2">
+        <a tal:attributes="href string:${context/absolute_url}/@@download/slides2/${context/slides2/filename}">
+                Slides in PDF- or PDF-Hybrid-File-Format</a>
+        </div>
+
+        <div tal:condition="context/slides3">
+        <label i18n:translate="label_slides_odt_link">Link to slides in ODT-File-Format:</label><br />
+        <a tal:attributes="href string:${context/slides3}" tal:content="string:${context/slides3}">Link</a>
+
+        </div>
+
+        <div tal:condition="context/slides4">
+        <label i18n:translate="label_slides_odt_link">Link to slides in PDF- or PDF-Hybrid-File-Format:</label><br />
+                <a tal:attributes="href string:${context/slides4}" tal:content="string:${context/slides4}">Link</a>
+
+        </div>
+        <div tal:condition="context/files">
+                <a tal:attributes="href string:${context/absolute_url}/@@download/files/${context/files/filename}">
+                Additonal Files</a>
+         </div>
+
+        <div tal:condition="context/files2">
+        <label i18n:translate="label_slides_odt_link">Link to additional files:</label><br />
+                <a tal:attributes="href string:${context/files2}" tal:content="string:${context/files2}">Link</a>
+        </div>
+
+        <div tal:condition="context/video">
+        <label i18n:translate="label_slides_odt_link">Link to video:</label>
+                <a tal:attributes="href string:${context/video}" tal:content="string:${context/video}">Link</a>
+        </div>
+
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
         
