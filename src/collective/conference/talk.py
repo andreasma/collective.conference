@@ -138,28 +138,41 @@ class ITalk(form.Schema):
                   
     
     slides = NamedBlobFile(
-            title=_(u"Presentation slides"),
+            title=_(u"Presentation slides in ODT-File-Format"),
             description=_(u"Please upload your presentation shortly after you have given your talk."),
             required=False,
         )
     
     slides2 = NamedBlobFile(
-            title=_(u"Presentation slides"),
+            title=_(u"Presentation slides in PDF-File-Format or PDF-Hybrid-File-Format"),
             description=_(u"Please upload your presentation shortly after you have given your talk."),
             required=False,
         )
 
     slides3 = schema.URI(
-            title=_(u"Link to the presentation slides"),
+            title=_(u"Link to the presentation slides in ODT-File-Format"),
             required=False,
         )
+    slides4 = schema.URI(
+        title=_(u"Link to the presentation slides in PDF-File-Format or PDF-Hybrid-File-Format"),
+        required=False,
+       )
 
     files = NamedBlobFile(
             title=_(u"Additional Files of your presentation."),
             description=_(u"Please upload the additional files of your presentation (in archive format) shortly after you have given your talk."),
             required=False,
         )
-    
+
+    files2 = schema.URI(
+            title=_(u"Link to additional Files of your presentation in archive file format (e.g. zip-file-format."),
+            required=False,
+        )
+
+    video = schema.URI(
+            title=_(u"Link to the Video of the talk"),
+            required=False,
+        )
     creativecommonslicense= schema.Bool(
             title=_(u'label_creative_commons_license', default=u'License is Creative Commons Attribution-Share Alike 3.0 License.'),
                 description=_(u'help_creative_commons_license', default=u'You agree that your talk and slides are provided under the Creative Commons Attribution-Share Alike 3.0 License.'),
