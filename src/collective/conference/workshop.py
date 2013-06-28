@@ -30,6 +30,28 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 #from collective.conference.track import setdates
 from zope.app.container.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+from collective import dexteritytextindexer
+
+
+@grok.provider(schema.interfaces.IContextSourceBinder)
+def vocabCfPTracks(context):
+    # For add forms
+
+    # For other forms edited or displayed
+    from collective.conference.callforpaper import ICallforpaper
+    if context is not None and not ICallforpaper.providedBy(context):
+        #context = aq_parent(aq_inner(context))
+        context = context.__parent__
+
+    track_list = []
+    if context is not None and context.cfp_tracks:
+        track_list = context.cfp_tracks
+
+    terms = []
+    for value in track_list:
+        terms.append(SimpleTerm(value, token=value.encode('unicode_escape'), title=value))
+
+    return SimpleVocabulary(terms)
 
 
 
@@ -79,14 +101,15 @@ class IWorkshop(form.Schema):
             title=_(u"Co-Leader of the workshop"),
             source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
             required=False,
-        )
-    form.widget(track=AutocompleteFieldWidget)
-    track = RelationChoice(
-            title=_(u"Track"),
-            source=ObjPathSourceBinder(object_provides=ITrack.__identifier__),
-            required=False,
-        )
-    
+ 
+    dexteritytextindexer.searchable('call_for_paper_tracks')
+    call_for_paper_tracks = schema.List(
+        title=_(u"Choose the track for your talk"),
+        value_type=schema.Choice(source=vocabCfPTracks),
+        required=True,
+    )
+
+
         
     dexterity.write_permission(startitem='collective.conference.ModifyTalktime')    
     startitem = schema.Datetime(
