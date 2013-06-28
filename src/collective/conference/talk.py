@@ -32,11 +32,40 @@ from Products.CMFCore.utils import getToolByName
 from zope.app.container.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
+
+from collective import dexteritytextindexer
+
+from Acquisition import aq_inner, aq_parent, aq_get
+
+
+
 #from collective.conference.track import setdates
 
 
 # class StartBeforeEnd(Invalid):
 #   __doc__ = _(u"The start or end date is invalid")
+
+
+@grok.provider(schema.interfaces.IContextSourceBinder)
+def vocabCfPTracks(context):
+    # For add forms
+
+    # For other forms edited or displayed
+    from collective.conference.callforpaper import ICallforpaper
+    if context is not None and not ICallforpaper.providedBy(context):
+        #context = aq_parent(aq_inner(context))
+        context = context.__parent__
+
+    track_list = []
+    if context is not None and context.cfp_tracks:
+        track_list = context.cfp_tracks
+
+    terms = []
+    for value in track_list:
+        terms.append(SimpleTerm(value, token=value.encode('unicode_escape'), title=value))
+
+    return SimpleVocabulary(terms)
+
 
 
 class ITalk(form.Schema):
@@ -49,12 +78,7 @@ class ITalk(form.Schema):
         SimpleTerm(value=u'45', title=_(u'45 minutes')),
         SimpleTerm(value=u'60', title=_(u'60 minutes'))]
         )
-    
-#    talktrack = SimpleVocabulary(
-#       [SimpleTerm(value=u'UX', title=_(u'Usability')),
-#        SimpleTerm(value=u'Core-Development', title=_(u'Development in the Core')),
-#        SimpleTerm(value=u'Extension-Development', title=_(u'Development of Extensions')),]
-#        )
+ 
 
     title = schema.TextLine(
             title=_(u"Title"),
@@ -92,7 +116,16 @@ class ITalk(form.Schema):
             required=False,
         )
  
-    
+
+    dexteritytextindexer.searchable('call_for_paper_tracks')
+    call_for_paper_tracks = schema.List(
+        title=_(u"Choose the track for your talk"),
+        value_type=schema.Choice(source=vocabCfPTracks),
+        required=True,
+    )
+
+ 
+ 
     form.widget(track=AutocompleteFieldWidget)
     track = RelationChoice(
             title=_(u"Track"),
@@ -115,12 +148,7 @@ class ITalk(form.Schema):
             description =_(u"End date"),
             required=False,
         )
-    
-#    talktrack= schema.Choice(
-#               title=_(u"Choose the Track for the Talk"),
-#               vocabulary=talktrack,
-#               required=True,
-#               )
+
         
     length= schema.Choice(
             title=_(u"Length"),
