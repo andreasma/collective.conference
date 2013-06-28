@@ -43,6 +43,7 @@ setup(name='collective.conference',
           'plone.namedfile [blobs]',
           'plone.formwidget.namedfile',
           'collective.wtf',
+          'collective.dexteritytextindexer',
       ],
       extras_require={
           'test':  ['plone.app.testing', 'plone.mocktestcase'],
