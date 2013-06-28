@@ -44,6 +44,14 @@ class ICallforpaper(form.Schema):
             description=_(u"Details about the program"),
             required=True,
         )
+        
+    cfp_tracks = schema.List(title=_(u"Tracks for the Call for Papers"),
+           default=['Development',
+                    'Documentation',
+                    'Project-Administration'],
+           value_type=schema.TextLine()
+    )
+
     
 
 
