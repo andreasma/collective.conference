@@ -21,7 +21,6 @@ from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 
 from collective.conference.talk import ITalk
-from collective.conference.workshop import IWorkshop
 
 class ICallforpaper(form.Schema):
     """A call for paper for a conference. 

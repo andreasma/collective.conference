@@ -101,10 +101,12 @@ class IWorkshop(form.Schema):
             title=_(u"Co-Leader of the workshop"),
             source=ObjPathSourceBinder(object_provides=ISpeaker.__identifier__),
             required=False,
- 
+            )
+
+
     dexteritytextindexer.searchable('call_for_paper_tracks')
     call_for_paper_tracks = schema.List(
-        title=_(u"Choose the track for your talk"),
+        title=_(u"Choose the track for your workshop"),
         value_type=schema.Choice(source=vocabCfPTracks),
         required=True,
     )
