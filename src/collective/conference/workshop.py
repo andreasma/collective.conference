@@ -198,3 +198,16 @@ class View(dexterity.DisplayForm):
 
     def canRequestReview(self):
         return checkPermission('cmf.RequestReview', self.context)
+
+
+
+
+    def WorkshopRoom(context):
+
+       from collective.conference.track import ITrack
+
+       if context is ITrack.providedBy(context):
+           room = context.room
+       else: room = ""
+
+       return room

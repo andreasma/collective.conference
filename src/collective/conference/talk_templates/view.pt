@@ -58,12 +58,14 @@
         </div>
 
         <div class="talkroom">
-        
+
          <label i18n:translate="label_room">Room:</label>
-         <span tal:condition="context/room">
-            <a tal:attributes="href context/room/to_object/absolute_url"><span tal:content="context/room/to_object/Title | nothing" /></a>
-        </span>
+
+         <span tal:content="view/TalkRoom" />
+
         </div>
+
+
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
         <h4>Details of the Talk</h4>
