@@ -31,6 +31,8 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.app.container.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from collective import dexteritytextindexer
+from zope.lifecycleevent.interfaces import IObjectMovedEvent
+from collective.conference.callforpaper import ICallforpaper
 
 
 @grok.provider(schema.interfaces.IContextSourceBinder)
@@ -38,13 +40,13 @@ def vocabCfPTracks(context):
     # For add forms
 
     # For other forms edited or displayed
-    from collective.conference.callforpaper import ICallforpaper
+
     if context is not None and not ICallforpaper.providedBy(context):
         #context = aq_parent(aq_inner(context))
         context = context.__parent__
 
     track_list = []
-    if context is not None and context.cfp_tracks:
+    if context is not None and hasattr(context, 'cfp_tracks'):
         track_list = context.cfp_tracks
 
     terms = []
@@ -52,8 +54,6 @@ def vocabCfPTracks(context):
         terms.append(SimpleTerm(value, token=value.encode('unicode_escape'), title=value))
 
     return SimpleVocabulary(terms)
-
-
 
 
 # class StartBeforeEnd(Invalid):
@@ -173,7 +173,14 @@ class IWorkshop(form.Schema):
             required=False,
         )
 
-    
+
+
+@grok.subscribe(IWorkshop, IObjectMovedEvent)
+def removeCFP_referenceworkshop(workshop, event):
+    if not ICallforpaper.providedBy(event.newParent):
+        workshop.call_for_paper_tracks = None
+
+
 #    @invariant
 #    def validateStartEnd(data):
 #        if data.start is not None and data.end is not None:

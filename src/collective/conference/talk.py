@@ -36,8 +36,8 @@ from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from collective import dexteritytextindexer
 
 from Acquisition import aq_inner, aq_parent, aq_get
-
-
+from zope.lifecycleevent.interfaces import IObjectMovedEvent
+from collective.conference.callforpaper import ICallforpaper
 
 #from collective.conference.track import setdates
 
@@ -51,13 +51,13 @@ def vocabCfPTracks(context):
     # For add forms
 
     # For other forms edited or displayed
-    from collective.conference.callforpaper import ICallforpaper
+    
     if context is not None and not ICallforpaper.providedBy(context):
         #context = aq_parent(aq_inner(context))
         context = context.__parent__
 
     track_list = []
-    if context is not None and context.cfp_tracks:
+    if context is not None and hasattr(context, 'cfp_tracks'):
         track_list = context.cfp_tracks
 
     terms = []
@@ -65,7 +65,6 @@ def vocabCfPTracks(context):
         terms.append(SimpleTerm(value, token=value.encode('unicode_escape'), title=value))
 
     return SimpleVocabulary(terms)
-
 
 
 class ITalk(form.Schema):
@@ -221,6 +220,11 @@ class ITalk(form.Schema):
             required=False,
         )
 
+
+@grok.subscribe(ITalk, IObjectMovedEvent)
+def removeCFP_reference(talk, event):
+    if not ICallforpaper.providedBy(event.newParent):
+        talk.call_for_paper_tracks = None
 
     
 #@grok.subscribe(ITalk, IObjectAddedEvent)
