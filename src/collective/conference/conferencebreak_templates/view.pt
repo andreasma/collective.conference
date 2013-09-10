@@ -17,14 +17,7 @@
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />
         
-        
-        <div tal:condition="context/track">
-            <label i18n:translate="track">Track:</label>
-            <a tal:attributes="href context/track/to_object/absolute_url">
-            <span tal:content="context/track/to_object/Title | nothing" />
-            </a>
-        </div>
-        
+
         <div>
              <label i18n:translate="time">Time:</label>
              
@@ -40,7 +33,8 @@
         
         
         <div tal:replace="structure provider:plone.abovecontentbody" />
-        <h4>Details of the Talk</h4>
+
+        <h4 tal:condition="context/details">Details of the Break</h4>
 
         <div tal:content="structure view/w/details/render" />
 

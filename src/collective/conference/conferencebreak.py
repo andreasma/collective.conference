@@ -55,21 +55,22 @@ class IConferencebreak(form.Schema):
 
     description = schema.Text(
             title=_(u"Conference break summary"),
+            required=False
         )
 
     form.primary('details')
     details = RichText(
             title=_(u"Conference break details"),
-            required=True
+            required=False
         )
         
         
-    form.widget(track=AutocompleteFieldWidget)
-    track = RelationChoice(
-            title=_(u"Track"),
-            source=ObjPathSourceBinder(object_provides=ITrack.__identifier__),
-            required=False,
-        )
+#    form.widget(track=AutocompleteFieldWidget)
+#    track = RelationChoice(
+#            title=_(u"Track"),
+#            source=ObjPathSourceBinder(object_provides=ITrack.__identifier__),
+#            required=False,
+#        )
 
 
     dexterity.write_permission(startitem='collective.conference.ModifyTalktime')
