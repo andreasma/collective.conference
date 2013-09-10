@@ -11,6 +11,7 @@
  <property name="allowed_content_types">
      <element value="collective.conference.talk" />
      <element value="collective.conference.workshop" />
+     <element value="collective.conference.conferencebreak" />
  </property>
 
  <!-- schema interface -->
