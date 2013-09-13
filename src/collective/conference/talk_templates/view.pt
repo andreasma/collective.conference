@@ -33,7 +33,7 @@
 
         <div tal:condition="context/speaker3">
             <label i18n:translate="co_presenter">Co-Presenter:</label>
-            <a tal:attributes="href context/speaker3/to_object/absolute_url"><span tal:content="context/speaker2/to_object/Title | nothing" /></a>
+            <a tal:attributes="href context/speaker3/to_object/absolute_url"><span tal:content="context/speaker3/to_object/Title | nothing" /></a>
         </div>
 
 
