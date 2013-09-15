@@ -55,6 +55,8 @@
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
+        <h4>Details of the Workshop</h4>
+
         <div tal:content="structure view/w/details/render" />
 
         <div tal:replace="structure provider:plone.belowcontentbody" />

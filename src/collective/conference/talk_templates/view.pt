@@ -72,9 +72,11 @@
 
         <div tal:content="structure view/w/details/render" />
 
+         <div tal:condition="context/slides">
+
         <h4>Presentation Slides and additional files</h4>
 
-        <div tal:condition="context/slides">
+
         <a tal:attributes="href string:${context/absolute_url}/@@download/slides/${context/slides/filename}">
         Slides in ODT-File-Format</a>
         </div>
