@@ -209,12 +209,11 @@ class View(dexterity.DisplayForm):
 
 
 
-    def WorkshopRoom(context):
+    def WorkshopRoom(self):
 
        from collective.conference.track import ITrack
-
-       if context is ITrack.providedBy(context):
-           room = context.room
+       parent = aq_parent(aq_inner(self.context))
+       if ITrack.providedBy(parent):
+           room = parent.room.to_object.title
        else: room = ""
-
        return room

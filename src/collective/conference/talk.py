@@ -251,12 +251,10 @@ class View(dexterity.DisplayForm):
         return checkPermission('cmf.RequestReview', self.context)
 
 
-    def TalkRoom(context):
-
+    def TalkRoom(self):
        from collective.conference.track import ITrack
-
-       if context is ITrack.providedBy(context):
-           room = context.room
+       parent = aq_parent(aq_inner(self.context))
+       if ITrack.providedBy(parent):
+           room = parent.room.to_object.title
        else: room = ""
-
        return room
